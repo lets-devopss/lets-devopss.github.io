@@ -34,6 +34,20 @@ document.querySelectorAll('.site-nav a').forEach((link) => {
   });
 });
 
+document.querySelectorAll('.project-card-link[data-repo]').forEach((card) => {
+  const openRepository = () => window.open(card.dataset.repo, '_blank', 'noopener,noreferrer');
+  card.addEventListener('click', (event) => {
+    if (event.target.closest('a')) return;
+    openRepository();
+  });
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openRepository();
+    }
+  });
+});
+
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
